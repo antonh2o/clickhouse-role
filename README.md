@@ -27,7 +27,7 @@ clickhouse_password: netology
 Переменные для установки необходимых пакетов и конфигурационных файлов clickhouse
 vars/main.yml
 ```yaml
-clickhouse_version: "22.3.3.44"
+clickhouse_version: "22.9.3.18"
 clickhouse_packages:
   - clickhouse-client
   - clickhouse-server

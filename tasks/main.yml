@@ -3,12 +3,12 @@
 - block:
     - name: Get clickhouse distrib
       ansible.builtin.get_url:
-        url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
+        url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.x86_64.rpm"
         dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
         mode: 0755
       with_items: "{{ clickhouse_packages }}"
   rescue:
-    - name: Get clickhouse distrib
+    - name: Get clickhouse common-static distrib
       ansible.builtin.get_url:
         url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
         dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
@@ -39,7 +39,7 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
   become: true
-# Принудительное использование handlers для старта сервиса clickhouse-server, иначе не получится создать БД
+# Принудительное использование handlers для сарта сервиса clickhouse-server, иначе не получится создать БД
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
 # Задержка после рестарта сервера, что бы успел запустится
